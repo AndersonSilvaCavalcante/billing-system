@@ -3,7 +3,7 @@
 @tailwind utilities;
 @tailwind screens;
 
-@layer utilities   {
+@layer utilities {
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -14,6 +14,8 @@
 
   body {
     @apply bg-slate-50;
-    font-family: "Inter", sans-serif;
+    font-family: "Aventa-Bold ", "Aventa-Bold  Placeholder", sans-serif;
+    background-color: #121212;
+    width: 100vw;
   }
 }
