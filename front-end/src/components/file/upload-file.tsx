@@ -1,11 +1,12 @@
 import { useFile, useFileDispatch } from "@/providers/file.provider"
 import React from "react"
 import { FileUploader } from "@/components/ui/file-uploader"
-import { sendFile } from "@/services/files-api"
 import { FileActionType } from "@/types"
+import FileListTable from "./file-list-table"
+import { sendFile } from "@/services/files-api"
 
 const UploadFile: React.FC = () => {
-    const { file } = useFile();
+    const { file, fileList } = useFile();
     const dispatch = useFileDispatch();
 
     function setFile(file: File | null) {
@@ -15,7 +16,7 @@ const UploadFile: React.FC = () => {
         });
     }
 
-    function unsetFile(){
+    function unsetFile() {
         dispatch({
             type: FileActionType.CANCEL_FILE_UPLOAD
         });
@@ -27,11 +28,9 @@ const UploadFile: React.FC = () => {
         if (file) {
             try {
                 await sendFile(file);
-                dispatch({
-                    type: FileActionType.FILE_UPLOADED_SUCCESSFULLY
-                });
+                dispatch({ type: FileActionType.FILE_UPLOADED_SUCCESSFULLY });
             } catch (error) {
-                console.error("Erro ao enviar o arquivo:", error);
+                console.error("Error sending file:", error);
                 dispatch({ type: FileActionType.FILE_UPLOAD_FAILED });
             }
         }
@@ -40,6 +39,9 @@ const UploadFile: React.FC = () => {
     return (
         <>
             <FileUploader file={file} setSelectedFile={setFile} sendSelectedFile={uploadFile} cleanSelectedFile={unsetFile} />
+            {fileList.length > 0 && (
+                <FileListTable fileList={fileList}  />
+            )}
         </>
     )
 }

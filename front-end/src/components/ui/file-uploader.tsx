@@ -1,3 +1,4 @@
+import { formatFileSize } from "@/lib/utils";
 import React from "react"
 
 type FileUploaderProps = {
@@ -28,7 +29,7 @@ const FileUploader = ({ file, setSelectedFile, sendSelectedFile, cleanSelectedFi
           <ul className="text-start">
             <li>Nome: {file.name}</li>
             <li>Tipo: {file.type}</li>
-            <li>Tamanho: {file.size} bytes</li>
+            <li>Tamanho: {formatFileSize(file.size)}</li>
           </ul>
           <div className="space-x-4 pt-6">
             <button onClick={sendSelectedFile} className="rounded-lg bg-green-600 text-white px-4 py-2 border-none font-semibold">Fazer envio</button>

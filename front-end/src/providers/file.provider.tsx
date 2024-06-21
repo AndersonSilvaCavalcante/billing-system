@@ -16,7 +16,11 @@ function fileReducer(state: FileContextState, action: FileAction): FileContextSt
         case FileActionType.SENDING_FILE:
             return { ...state, isLoading: true };
         case FileActionType.FILE_UPLOADED_SUCCESSFULLY:
-            return { ...state, file: null, isLoading: false };
+            const newFileList: Array<File> = state.fileList
+            if (state.file) {
+                newFileList.push(state.file)
+            }
+            return { ...state, file: null, isLoading: false, fileList: newFileList };
         case FileActionType.FILE_UPLOAD_FAILED:
             return { ...state, isLoading: false }
         case FileActionType.CANCEL_FILE_UPLOAD:
