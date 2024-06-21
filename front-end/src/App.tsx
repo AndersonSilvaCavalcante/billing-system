@@ -1,6 +1,7 @@
 import React from "react"
 import { FileProvider } from "@/providers/file.provider"
 import UploadFile from "@/components/file/upload-file"
+import FileListTable from "./components/file/file-list-table"
 
 const App: React.FC = () => {
     return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
                 <div>
                     <FileProvider>
                         <UploadFile />
+                        <FileListTable />
                     </FileProvider>
                 </div>
             </div>

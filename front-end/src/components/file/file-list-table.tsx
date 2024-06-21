@@ -1,8 +1,15 @@
 import { formatFileSize } from "@/lib/utils"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "../ui"
 import React from "react"
+import { useFile } from "@/providers/file.provider";
 
-const FileListTable: React.FC<{ fileList: Array<File> }> = ({ fileList }) => {
+const FileListTable: React.FC = () => {
+    const { fileList } = useFile();
+    
+    if(fileList.length < 0 ){
+        return <></>
+    }
+
     return (
         <Table className="text-start">
             <TableHeader>

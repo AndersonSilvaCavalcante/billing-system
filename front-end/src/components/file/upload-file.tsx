@@ -2,11 +2,10 @@ import { useFile, useFileDispatch } from "@/providers/file.provider"
 import React from "react"
 import { FileUploader } from "@/components/ui/file-uploader"
 import { FileActionType } from "@/types"
-import FileListTable from "./file-list-table"
 import { sendFile } from "@/services/files-api"
 
 const UploadFile: React.FC = () => {
-    const { file, fileList } = useFile();
+    const { file } = useFile();
     const dispatch = useFileDispatch();
 
     function setFile(file: File | null) {
@@ -39,9 +38,6 @@ const UploadFile: React.FC = () => {
     return (
         <>
             <FileUploader file={file} setSelectedFile={setFile} sendSelectedFile={uploadFile} cleanSelectedFile={unsetFile} />
-            {fileList.length > 0 && (
-                <FileListTable fileList={fileList}  />
-            )}
         </>
     )
 }
